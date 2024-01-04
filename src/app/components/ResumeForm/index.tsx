@@ -30,7 +30,6 @@ export const ResumeForm = () => {
 
   const formsOrder = useAppSelector(selectFormsOrder);
   const [isHover, setIsHover] = useState(false);
-
   return (
     <div
       className={cx(

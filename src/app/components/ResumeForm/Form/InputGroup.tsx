@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import ContentEditable from "react-contenteditable";
 import { useAutosizeTextareaHeight } from "lib/hooks/useAutosizeTextareaHeight";
 
+// Ant Design Components import
+import { Form as AntForm, Input as AntInput } from "antd";
+
+const { TextArea: AntTextArea } = AntInput;
+
 interface InputProps<K extends string, V extends string | string[]> {
   label: string;
   labelClassName?: string;
@@ -33,7 +38,7 @@ export const InputGroupWrapper = ({
 );
 
 export const INPUT_CLASS_NAME =
-  "mt-1 px-3 py-2 block w-full rounded-md border border-gray-300 text-gray-900 shadow-sm outline-none font-normal text-base";
+  "mt-1 px-3 py-2 block w-full rounded-md border border-gray-300 text-gray-900 shadow-sm outline-none font-normal text-base  outline-offset-0";
 
 export const Input = <K extends string>({
   name,
@@ -45,7 +50,7 @@ export const Input = <K extends string>({
 }: InputProps<K, string>) => {
   return (
     <InputGroupWrapper label={label} className={labelClassName}>
-      <input
+      <AntInput
         type="text"
         name={name}
         value={value}
@@ -69,10 +74,11 @@ export const Textarea = <T extends string>({
 
   return (
     <InputGroupWrapper label={label} className={wrapperClassName}>
-      <textarea
-        ref={textareaRef}
+      <AntTextArea
+        // ref={textareaRef}
+        autoSize={{ minRows: 0, maxRows: 6 }}
         name={name}
-        className={`${INPUT_CLASS_NAME} resize-none overflow-hidden`}
+        className={`${INPUT_CLASS_NAME} resize-none overflow-scroll`}
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(name, e.target.value)}
@@ -126,7 +132,8 @@ const BulletListTextareaGeneral = <T extends string>({
     <InputGroupWrapper label={label} className={wrapperClassName}>
       <ContentEditable
         contentEditable={true}
-        className={`${INPUT_CLASS_NAME} cursor-text [&>div]:list-item ${
+        // custom border color added when hover or focus
+        className={`${INPUT_CLASS_NAME} hover:border-[#4096ff] focus:border-[#1677ff] [&>div]:list-item ${
           showBulletPoints ? "pl-7" : "[&>div]:list-['']"
         }`}
         // Note: placeholder currently doesn't work
