@@ -1,7 +1,6 @@
 import { cx } from "lib/cx";
 import { Tooltip } from "components/Tooltip";
-
-// import { Button as AntButton } from "antd";
+import { Button as AntButton, ButtonProps as AntButtonProps } from "antd";
 
 type ReactButtonProps = React.ComponentProps<"button">;
 type ReactAnchorProps = React.ComponentProps<"a">;
@@ -15,13 +14,11 @@ export const Button = (props: ButtonProps) => {
   if (isAnchor(props)) {
     return <a {...props} />;
   } else {
-    return <button type="button" {...props} />;
+    // Omitting 'type' prop to avoid conflict with AntButton
+    const { type, ...buttonProps } = props;
+    return <button type="button" {...buttonProps} />;
   }
 };
-
-export const PrimaryButton = ({ className, ...props }: ButtonProps) => (
-  <Button className={cx("btn-primary", className)} {...props} />
-);
 
 type IconButtonProps = ButtonProps & {
   size?: "small" | "medium";
@@ -35,14 +32,14 @@ export const IconButton = ({
   ...props
 }: IconButtonProps) => (
   <Tooltip text={tooltipText}>
-    <Button
-      type="button"
+    <AntButton
+      type="default" // Set the type explicitly or omit it based on your needs
       className={cx(
-        "rounded-full outline-none hover:bg-gray-100 focus-visible:bg-gray-100",
+        "rounded-full  outline-none hover:bg-gray-100 focus-visible:bg-gray-100",
         size === "medium" ? "p-1.5" : "p-1",
         className
       )}
-      {...props}
+      {...(props as AntButtonProps)} // Pass relevant properties to AntButton
     />
   </Tooltip>
 );

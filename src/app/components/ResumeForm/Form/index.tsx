@@ -29,6 +29,9 @@ import {
   moveSectionInForm,
 } from "lib/redux/resumeSlice";
 
+// Ant Design Button Component
+import { Button as AntButton } from "antd";
+
 /**
  * BaseForm is the bare bone form, i.e. just the outline with no title and no control buttons.
  * ProfileForm uses this to compose its outline.
@@ -41,7 +44,7 @@ export const BaseForm = ({
   className?: string;
 }) => (
   <section
-    className={`flex flex-col gap-3 rounded-md bg-white p-6 pt-4 shadow transition-opacity duration-200 ${className}`}
+    className={`flex flex-col gap-6 rounded-md bg-white p-6 pt-4 shadow transition-opacity duration-200 ${className}`}
   >
     {children}
   </section>
@@ -100,7 +103,7 @@ export const Form = ({
             onChange={(e) => setHeading(e.target.value)}
           />
         </div>
-        <div className="flex items-center gap-0.5">
+        <div className="flex items-center gap-0.5 ">
           {!isFirstForm && (
             <MoveIconButton type="up" onClick={handleMoveClick} />
           )}
@@ -115,8 +118,8 @@ export const Form = ({
       </ExpanderWithHeightTransition>
       {showForm && addButtonText && (
         <div className="mt-2 flex justify-end">
-          <button
-            type="button"
+          <AntButton
+            type="default"
             onClick={() => {
               dispatch(addSectionInForm({ form }));
             }}
@@ -127,7 +130,7 @@ export const Form = ({
               aria-hidden="true"
             />
             {addButtonText}
-          </button>
+          </AntButton>
         </div>
       )}
     </BaseForm>
@@ -166,7 +169,7 @@ export const FormSection = ({
       )}
       <div className="relative grid grid-cols-6 gap-3">
         {children}
-        <div className={`absolute right-0 top-0 flex gap-0.5 `}>
+        <div className={`absolute right-0 top-[-11px] flex gap-0.5 `}>
           <div
             className={`transition-all duration-300 ${
               showMoveUp ? "" : "invisible opacity-0"
