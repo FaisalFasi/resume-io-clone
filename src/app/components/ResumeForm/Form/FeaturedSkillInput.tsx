@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { INPUT_CLASS_NAME } from "components/ResumeForm/Form/InputGroup";
+import { Input as AntInput } from "antd";
 
 export const FeaturedSkillInput = ({
   skill,
@@ -18,7 +19,7 @@ export const FeaturedSkillInput = ({
 }) => {
   return (
     <div className={`flex ${className}`}>
-      <input
+      <AntInput
         type="text"
         value={skill}
         placeholder={placeholder}

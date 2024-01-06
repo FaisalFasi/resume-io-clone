@@ -8,6 +8,8 @@ import {
 import { getAllFontFamiliesToLoad } from "components/fonts/lib";
 import dynamic from "next/dynamic";
 
+import { Button as AntButton } from "antd";
+
 const Selection = ({
   selectedColor,
   isSelected,
@@ -29,8 +31,8 @@ const Selection = ({
   };
 
   return (
-    <div
-      className="flex w-[105px] cursor-pointer items-center justify-center rounded-md border border-gray-300 py-1.5 shadow-sm hover:border-gray-400 hover:bg-gray-100"
+    <AntButton
+      className="flex h-fit w-[105px] cursor-pointer items-center justify-center rounded-md border border-gray-300 py-1.5 shadow-sm hover:border-gray-400 hover:bg-gray-100"
       onClick={onClick}
       style={isSelected ? selectedStyle : style}
       onKeyDown={(e) => {
@@ -39,7 +41,7 @@ const Selection = ({
       tabIndex={0}
     >
       {children}
-    </div>
+    </AntButton>
   );
 };
 

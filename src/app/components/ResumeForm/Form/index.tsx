@@ -30,7 +30,7 @@ import {
 } from "lib/redux/resumeSlice";
 
 // Ant Design Button Component
-import { Button as AntButton } from "antd";
+import { Button as AntButton, Input as AntInput } from "antd";
 
 /**
  * BaseForm is the bare bone form, i.e. just the outline with no title and no control buttons.
@@ -95,13 +95,19 @@ export const Form = ({
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex grow items-center gap-2">
-          <Icon className="h-6 w-6 text-gray-600" aria-hidden="true" />
-          <input
+          <AntInput
+            className=" border-b border-transparent text-lg font-semibold tracking-wide"
+            prefix={<Icon className="mr-2 h-5 w-5 text-gray-400" />}
+            value={heading}
+            onChange={(e) => setHeading(e.target.value)}
+          />
+
+          {/* <input
             type="text"
             className="block w-full border-b border-transparent text-lg font-semibold tracking-wide text-gray-900 outline-none hover:border-gray-300 hover:shadow-sm focus:border-gray-300 focus:shadow-sm"
             value={heading}
             onChange={(e) => setHeading(e.target.value)}
-          />
+          /> */}
         </div>
         <div className="flex items-center gap-0.5 ">
           {!isFirstForm && (
