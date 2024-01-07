@@ -20,12 +20,13 @@ export const TopNavBar = () => {
       <div className="flex h-10 w-full items-center justify-between">
         <Link href="/">
           <span className="sr-only">OpenResume</span>
-          <Image
+          <h1 className="text-xl font-bold">WIVRO RESUME</h1>
+          {/* <Image
             src={logoSrc}
             alt="OpenResume Logo"
             className="h-8 w-full"
             priority
-          />
+          /> */}
         </Link>
         <nav
           aria-label="Site Nav Bar"
@@ -34,6 +35,7 @@ export const TopNavBar = () => {
           {[
             ["/resume-builder", "Builder"],
             ["/resume-parser", "Parser"],
+            ["/login", "LogIn"],
           ].map(([href, text]) => (
             <Link
               key={text}
