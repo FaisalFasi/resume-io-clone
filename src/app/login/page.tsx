@@ -1,8 +1,15 @@
 "use client";
-import { Form, Input, Button } from "antd";
-import { useRouter } from "next/navigation";
 
-const Login = () => {
+import { Form, Input, Button } from "antd";
+import BGWrapper from "components/WrapperBG";
+import { useRouter } from "next/navigation";
+import AuthService from "services/authService";
+
+type LoginProps = {
+  setLoggedIn: (loggedIn: boolean) => void;
+};
+
+const Login: React.FC<LoginProps> = ({ setLoggedIn }) => {
   const router = useRouter();
 
   const formItemLayout = {
@@ -13,15 +20,33 @@ const Login = () => {
   const handleSignupClick = () => {
     router.push("/sign-up");
   };
+
+  const handleLoginClick = async () => {
+    const email = ""; // get email from form;
+    const password = ""; // get password from form;
+
+    try {
+      const token = await AuthService.login(email, password);
+      AuthService.saveToken(token);
+      setLoggedIn(true);
+    } catch (error) {
+      console.error("Login failed:", error);
+      // Handle login error
+    }
+  };
   return (
-    <div className="mt-[-60px] flex h-screen items-center justify-center">
+    <BGWrapper>
+      <div>
+        <h1 className="text-2xl font-bold">Log In</h1>
+      </div>
       <Form
         name="basic"
         {...formItemLayout}
         initialValues={{ remember: true }}
         style={{
-          maxWidth: 400,
-          margin: "auto",
+          maxWidth: "100%", // Adjusted to be full-width on small screens
+          width: "400px", // Set a fixed width for larger screens
+          margin: "40px ",
           padding: "20px",
           border: "1px solid #ccc",
           borderRadius: "8px",
@@ -51,17 +76,18 @@ const Login = () => {
             size="large"
             block
             className="bg-[#1677ff]"
-            onClick={() => console.log("clicked")}
+            onClick={handleLoginClick}
           >
             Login
           </Button>
         </Form.Item>
+
         <div className="text-center">
           Don't have an account?{" "}
           <Button onClick={handleSignupClick}>Sign up</Button>
         </div>
       </Form>
-    </div>
+    </BGWrapper>
   );
 };
 

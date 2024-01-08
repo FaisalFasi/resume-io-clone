@@ -1,13 +1,22 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import logoSrc from "public/logo.svg";
 import { cx } from "lib/cx";
+import { useState } from "react";
+import Login from "login/page";
 
 export const TopNavBar = () => {
   const pathName = usePathname();
+  const router = useRouter();
   const isHomePage = pathName === "/";
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  if (!loggedIn) {
+    // router.push("/login");
+    // return <Login setLoggedIn={setLoggedIn} />;
+  }
 
   return (
     <header

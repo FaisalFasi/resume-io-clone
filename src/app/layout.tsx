@@ -1,7 +1,6 @@
 import "globals.css";
 import { TopNavBar } from "components/TopNavBar";
 import { Analytics } from "@vercel/analytics/react";
-import Login from "login/page";
 
 export const metadata = {
   title: "OpenResume - Free Open-source Resume Builder and Parser",
