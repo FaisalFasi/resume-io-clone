@@ -133,7 +133,7 @@ const BulletListTextareaGeneral = <T extends string>({
       <ContentEditable
         contentEditable={true}
         // custom border color added when hover or focus
-        className={`${INPUT_CLASS_NAME} hover:border-[#4096ff] focus:border-[#1677ff] [&>div]:list-item ${
+        className={`${INPUT_CLASS_NAME} mt-4 hover:border-[#4096ff] focus:border-[#1677ff] [&>div]:list-item ${
           showBulletPoints ? "pl-7" : "[&>div]:list-['']"
         }`}
         // Note: placeholder currently doesn't work

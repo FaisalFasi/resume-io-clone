@@ -15,7 +15,7 @@ export const ExpanderWithHeightTransition = ({
 }) => {
   return (
     <div
-      className={`grid overflow-hidden transition-all duration-300 ${
+      className={`grid overflow-hidden pt-4 transition-all duration-300 ${
         expanded ? "visible" : "invisible"
       }`}
       style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
