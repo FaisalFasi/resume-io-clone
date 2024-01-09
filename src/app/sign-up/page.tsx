@@ -2,7 +2,8 @@
 import { Form, Input, Button } from "antd";
 import BGWrapper from "components/WrapperBG";
 import { useRouter } from "next/navigation";
-import AuthService from "services/authService";
+// import AuthService from "services/authService";
+import { signup, saveToken } from "services/authService";
 import { Rule } from "antd/lib/form";
 import { useState } from "react";
 
@@ -39,7 +40,6 @@ const SignUp = () => {
   };
 
   const handleSignupClick = async () => {
-    console.log("handleSignupClick");
     let fullname: string = userInput.fullname;
     let email: string = userInput.email;
     let password: string = userInput.password;
@@ -60,8 +60,8 @@ const SignUp = () => {
     }
 
     try {
-      const token = await AuthService.signup(fullname, email, password);
-      AuthService.saveToken(token);
+      const token = await signup(fullname, email, password);
+      saveToken(token);
       // You can redirect to the login page or do other actions after signup
       router.push("/login");
     } catch (error) {

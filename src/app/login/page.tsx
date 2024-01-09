@@ -3,8 +3,8 @@
 import { Form, Input, Button } from "antd";
 import BGWrapper from "components/WrapperBG";
 import { useRouter } from "next/navigation";
-import AuthService from "services/authService";
-
+// import AuthService from "services/authService";
+import { login, saveToken } from "services/authService";
 type LoginProps = {
   setLoggedIn: (loggedIn: boolean) => void;
 };
@@ -26,8 +26,8 @@ const Login: React.FC<LoginProps> = ({ setLoggedIn }) => {
     const password = ""; // get password from form;
 
     try {
-      const token = await AuthService.login(email, password);
-      AuthService.saveToken(token);
+      const token = await login(email, password);
+      saveToken(token);
       setLoggedIn(true);
     } catch (error) {
       console.error("Login failed:", error);

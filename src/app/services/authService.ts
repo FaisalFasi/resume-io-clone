@@ -1,7 +1,5 @@
-// services/authService.ts
-import axios from "axios";
-
-const API_URL = "your_api_url_here"; // Replace with your API URL
+const API_URL =
+  "https://bfa9-2407-aa80-126-65a8-6c75-140b-577-af62.ngrok-free.app"; // Replace with your API URL
 
 type LoginResponse = {
   token: string;
@@ -11,51 +9,80 @@ type SignupResponse = {
   token: string;
 };
 
-const AuthService = {
-  login: async (email: string, password: string): Promise<string> => {
-    try {
-      const response = await axios.post<LoginResponse>(`${API_URL}/login`, {
+export const login = async (
+  email: string,
+  password: string
+): Promise<string> => {
+  try {
+    const response = await fetch(`${API_URL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         email,
         password,
-      });
-      const { token } = response.data;
-      return token;
-    } catch (error) {
-      throw error;
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status code ${response.status}`);
     }
-  },
 
-  signup: async (
-    fullname: string,
-    email: string,
-    password: string
-  ): Promise<string> => {
-    try {
-      const response = await axios.post<SignupResponse>(`${API_URL}/signup`, {
-        fullname,
-        email,
-        password,
-      });
-      const { token } = response.data;
-      return token;
-    } catch (error) {
-      throw error;
-    }
-  },
+    const data: LoginResponse = await response.json();
+    console.log(data);
 
-  // You can add a function to save and retrieve tokens from localStorage or cookies
-  saveToken: (token: string) => {
-    localStorage.setItem("token", token);
-  },
-
-  getToken: (): string | null => {
-    return localStorage.getItem("token");
-  },
-
-  // Add a function to remove the token on logout
-  logout: () => {
-    localStorage.removeItem("token");
-  },
+    return data.token;
+  } catch (error) {
+    throw error;
+  }
 };
 
-export default AuthService;
+export const signup = async (
+  username: string,
+  email: string,
+  password: string
+): Promise<string> => {
+  try {
+    const endpoint = `${API_URL}/register`;
+    console.log(endpoint);
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status code ${response.status}`);
+    }
+
+    const data: SignupResponse = await response.json();
+    if (!data.token) {
+      throw new Error("Token not found in the response data");
+    }
+    console.log(data);
+
+    return data.token;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const saveToken = (token: string): void => {
+  localStorage.setItem("token", token);
+};
+
+export const getToken = (): string | null => {
+  return localStorage.getItem("token");
+};
+
+export const logout = (): void => {
+  localStorage.removeItem("token");
+};
