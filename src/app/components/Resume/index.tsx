@@ -16,7 +16,7 @@ import {
   useRegisterReactPDFHyphenationCallback,
 } from "components/fonts/hooks";
 import { NonEnglishFontsCSSLazyLoader } from "components/fonts/NonEnglishFontsCSSLoader";
-
+import { Button } from "antd";
 export const Resume = () => {
   const [scale, setScale] = useState(0.8);
   const resume = useAppSelector(selectResume);
@@ -36,6 +36,9 @@ export const Resume = () => {
         <FlexboxSpacer maxWidth={50} className="hidden md:block" />
         <div className="relative">
           <section className="h-[calc(100vh-var(--top-nav-bar-height)-var(--resume-control-bar-height))] overflow-hidden md:p-[var(--resume-padding)]">
+            <div>
+              <Button>Template</Button>
+            </div>
             <ResumeIframeCSR
               documentSize={settings.documentSize}
               scale={scale}

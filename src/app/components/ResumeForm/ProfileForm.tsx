@@ -4,9 +4,6 @@ import { useAppDispatch, useAppSelector } from "lib/redux/hooks";
 import { changeProfile, selectProfile } from "lib/redux/resumeSlice";
 import { ResumeProfile } from "lib/redux/types";
 
-// Ant Design Components import
-// import { Button, Form as AntForm, Input as AntInput } from "antd";
-
 export const ProfileForm = () => {
   const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
@@ -17,20 +14,6 @@ export const ProfileForm = () => {
   };
 
   return (
-    // <BaseForm>
-    //   <AntForm>
-    //     <div className="grid grid-cols-6 gap-3">
-    //       <AntForm.Item name={"full name"} label="Name">
-    //         <AntInput
-    //           aria-label="Name"
-    //           placeholder="Full Name"
-    //           className="col-span-full"
-    //         />
-    //       </AntForm.Item>
-    //     </div>
-    //   </AntForm>
-    // </BaseForm>
-
     <BaseForm>
       <div className="grid grid-cols-6 gap-3">
         <Input
